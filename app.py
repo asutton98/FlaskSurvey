@@ -30,6 +30,10 @@ def handle_question():
 @app.route('/questions/<int:id>')
 def show_question(id):
     question = survey.questions[id]
+    if(len(responses) != id):
+        flash(f'Invalid Question ID:{id} ','error')
+        return redirect(f'/questions/{len(responses)}')
+        
     return render_template('question.html', question_num = id, question=question)
 
 @app.route('/complete')
